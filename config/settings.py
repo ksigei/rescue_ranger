@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'lostperson.apps.LostpersonConfig',
     'accounts.apps.AccountsConfig',
     'sightings.apps.SightingsConfig',
-    'locations.apps.LocationsConfig'
+    'locations.apps.LocationsConfig',
+    'contacts.apps.ContactsConfig'
 ]
 
 MIDDLEWARE = [
