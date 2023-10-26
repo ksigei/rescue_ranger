@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lostperson.apps.LostpersonConfig',
     'accounts.apps.AccountsConfig',
+    'sightings.apps.SightingsConfig',
+    'locations.apps.LocationsConfig'
 ]
 
 MIDDLEWARE = [
