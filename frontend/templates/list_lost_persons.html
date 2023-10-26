@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 class="mb-4">List of Lost Person Records</h2>
+
+    <a href="{% url 'create_lost_person' %}" class="btn btn-primary mb-4">Create New Lost Person Record</a>
+
+    <div class="row">
+        {% for lost_person in lost_persons %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ lost_person.image.url }}" class="card-img-top" alt="{{ lost_person.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ lost_person.name }}</h5>
+                        <p class="card-text">{{ lost_person.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Location:</strong> {{ lost_person.location }}</li>
+                        <li class="list-group-item"><strong>Reported By:</strong> {{ lost_person.reported_by }}</li>
+                        <li class="list-group-item"><strong>Reported At:</strong> {{ lost_person.reported_at }}</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="{% url 'view_lost_person' lost_person.id %}" class="btn btn-info mr-2">View</a>
+                        <a href="{% url 'update_lost_person' lost_person.id %}" class="btn btn-warning">Edit</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-muted">No lost person records found.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

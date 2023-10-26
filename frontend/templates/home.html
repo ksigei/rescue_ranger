@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to RescueRanger</h1>
+        <p class="lead">Your platform for tracing lost children and reuniting families.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">About Us</h2>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin euismod sapien a nulla facilisis, eget bibendum orci vulputate.</p>
+                    <a href="/about/" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Contact Us</h2>
+                    <p class="card-text">If you have any questions or need assistance, please don't hesitate to contact us.</p>
+                    <a href="/contact/" class="btn btn-primary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="mt-4">Latest Sighting Reports</h2>
+    <div class="row">
+        <!-- Display a list of the latest sighting reports -->
+        {% for sighting in latest_sightings %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ sighting.image.url }}" class="card-img-top" alt="{{ sighting.lost_person.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ sighting.lost_person.name }}</h5>
+                        <p class="card-text">{{ sighting.description }}</p>
+                        <a href="{% url 'sighting_detail' sighting.id %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

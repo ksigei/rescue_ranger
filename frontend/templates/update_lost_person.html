@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Update Lost Person Record</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Update Record</button>
+    </form>
+    <a href="{% url 'list_lost_persons' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}
