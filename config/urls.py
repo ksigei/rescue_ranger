@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('lostperson/', include('lostperson.urls')),
     # path('accounts/', include('accounts.urls')),
-    # path('sightings/', include('sightings.urls')),
+    path('', include('sightings.urls')),
     # path('locations/', include('locations.urls')),
     # path('contacts/', include('contacts.urls')),
 ]

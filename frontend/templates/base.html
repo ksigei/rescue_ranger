@@ -11,9 +11,11 @@
 <!-- Navigation Bar -->
 <nav class="bg-blue-500 p-4 text-white">
     <div class="container mx-auto flex justify-between items-center">
-        <a href="#" class="text-2xl font-bold">RescueRanger</a>
+        <a href="/" class="text-2xl font-bold">RescueRanger</a>
         <ul class="flex space-x-4">
-            <li><a href="#" class="hover:underline">Home</a></li>
+            <li><a href="/" class="hover:underline">Home</a></li>
+            <li><a href="{% url 'list_lost_persons' %}" class="hover:underline">Lost Persons</a></li>
+            <li><a href="{% url 'create_lost_person' %}" class="hover:underline">Add Lost Person</a></li>
             <li><a href="#" class="hover:underline">About</a></li>
             <li><a href="#" class="hover:underline">Services</a></li>
             <li><a href="#" class="hover:underline">Contact</a></li>

@@ -1,6 +1,9 @@
 from django.db import models
-from accounts.models import CustomUser as User
+# from accounts.models import CustomUser as User
+from django.contrib.auth import get_user_model
 from locations.models import Location
+
+User = get_user_model()
 
 class Color(models.Model):
     name = models.CharField(max_length=30)
@@ -37,6 +40,7 @@ class Height(models.Model):
     def __str__(self):
         return self.measurement
 
+
 class LostPerson(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -60,9 +64,11 @@ class LostPerson(models.Model):
     class Meta:
         ordering = ['-reported_at']
 
+class Comment(models.Model):
+    lost_person = models.ForeignKey(LostPerson, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    
-
-
-     
-
+    def __str__(self):
+        return f"Comment by {self.user.username} on {self.lost_person.name}"

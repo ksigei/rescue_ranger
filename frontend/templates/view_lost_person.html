@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Lost Person Details</h1>
+        <p class="lead">{{ lost_person.name }}</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <img src="{{ lost_person.image.url }}" class="card-img-top" alt="{{ lost_person.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ lost_person.name }}</h5>
+                    <p class="card-text">{{ lost_person.description }}</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Location:</strong> {{ lost_person.location }}</li>
+                        <li class="list-group-item"><strong>Reported By:</strong> {{ lost_person.reported_by }}</li>
+                        <li class="list-group-item"><strong>Reported At:</strong> {{ lost_person.reported_at }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Comment Form -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Add a Comment</h2>
+                    <form method="post" action="{% url 'create_comment' lost_person.id %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" name="text" rows="3" placeholder="Write your comment here"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Comment List -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Comments</h2>
+                    <ul class="list-group">
+                        {% for comment in lost_person.comments.all %}
+                            <li class="list-group-item">
+                                <strong>{{ comment.user.username }}</strong>
+                                <small class="text-muted">{{ comment.created_at }}</small>
+                                <p>{{ comment.text }}</p>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No comments yet.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <!-- Report Sighting Button -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <a href="{% url 'report_sighting' %}" class="btn btn-primary">Report Sighting</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

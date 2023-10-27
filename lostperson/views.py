@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from .models import Comment
 from .models import LostPerson
 from .forms import LostPersonForm
 
@@ -34,3 +37,14 @@ def list_lost_persons(request):
 def view_lost_person(request, lost_person_id):
     lost_person = LostPerson.objects.get(id=lost_person_id)
     return render(request, 'view_lost_person.html', {'lost_person': lost_person})
+
+@login_required
+def create_comment(request, lost_person_id):
+    if request.method == 'POST':
+        # Get the associated lost person
+        lost_person = get_object_or_404(LostPerson, pk=lost_person_id)
+        text = request.POST.get('text')
+        if text:
+            Comment.objects.create(lost_person=lost_person, user=request.user, text=text)
+        return redirect('list_lost_persons')
+    return redirect('list_lost_persons')
